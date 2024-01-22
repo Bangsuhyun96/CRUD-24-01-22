@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.curriculum.CurriculumMapper">
+    <select id="getAllCurriculum" resultType="com.example.demo.curriculum.CurriculumDto">
+        SELECT * FROM CURRICULUM
+    </select>
+    <select id="getCurriculum" resultType="com.example.demo.curriculum.CurriculumDto">
+        SELECT * FROM CURRICULUM
+        WHERE CURRICULUM_ID = #{curriculumId}
+    </select>
+    <insert id="insertCurriculum" parameterType="com.example.demo.curriculum.CurriculumDto">
+        insert into curriculum
+            (CURRICULUM_ID,
+            CURRICULUM_NAME,
+            CURRICULUM_CONTENT,
+            CURRICULUM_YEAR,
+            LECTURE_WEEK,
+            START_DATE,
+            END_DATE)
+        VALUES(
+                  #{curriculumId},
+                  #{curriculumName},
+                  #{curriculumContent},
+                  #{curriculumYear},
+                  #{lectureWeek},
+                  #{startDate},
+                  #{endDate}
+              )
+    </insert>
+    <delete id="deleteCurriculumId" parameterType="com.example.demo.curriculum.CurriculumDto">
+        DELETE
+        FROM curriculum
+        WHERE CURRICULUM_ID = #{curriculumId}
+    </delete>
+    <update id="updateCurriculumId" parameterType="com.example.demo.curriculum.CurriculumDto">
+        UPDATE curriculum
+        SET
+            CURRICULUM_ID = #{curriculumId},
+            CURRICULUM_NAME = #{curriculumName},
+            CURRICULUM_CONTENT = #{curriculumContent},
+            CURRICULUM_YEAR = #{curriculumYear},
+            LECTURE_WEEK = #{lectureWeek},
+            START_DATE = #{startDate},
+            END_DATE = #{endDate}
+        WHERE
+            CURRICULUM_ID = #{curriculumId};
+    </update>
+</mapper>

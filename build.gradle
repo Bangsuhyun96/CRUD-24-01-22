@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'war'
+    id 'org.springframework.boot' version '2.6.4' // 최신 안정 버전 사용
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE' // 최신 버전 사용
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.projectlombok:lombok'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'javax.servlet:jstl:1.2'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+    implementation 'com.h2database:h2'
+
+    // MyBatis
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0' // 최신 안정 버전 사용
+    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.2.0' // 최신 안정 버전 사용
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+// Deprecated 경고 감추기
+allprojects {
+    tasks.withType(JavaCompile) {
+        options.deprecation = false
+    }
+}
